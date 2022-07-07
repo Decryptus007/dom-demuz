@@ -10,6 +10,7 @@
 
 # production
 /build
+/UI
 
 # misc
 .DS_Store

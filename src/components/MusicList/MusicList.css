@@ -1,0 +1,13 @@
+.musicList {
+    width: 90%;
+    height: 60%;
+    margin: 2% auto 0;
+    color: white;
+    /* From https://css.glass */
+    background: rgba(49, 55, 83, 0.45);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.7px);
+    -webkit-backdrop-filter: blur(9.7px);
+    border: 1px solid rgba(49, 55, 83, 0.3);
+}

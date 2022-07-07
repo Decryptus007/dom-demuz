@@ -1,0 +1,36 @@
+.appUI {
+    height: 85vh;
+    width: 33%;
+    margin: 7.5vh auto 0;
+    border-radius: 25px;
+    background-color: #22273f;
+}
+
+.imageHolder {
+    border-radius: 25px 25px 0 0;
+    text-shadow: 2px 2px 2px black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 27%;
+    width: 100%;
+    background: blue url('../../images/ui-Image.jpg');
+    background-size: cover;
+}
+
+.deezerPowered {
+    text-align: center;
+    color: white;
+    margin: -7% auto 0;
+    width: 80%;
+    padding: 15px 0;
+    /* From https://css.glass */
+    background: rgba(49, 55, 83, 0.45);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.7px);
+    -webkit-backdrop-filter: blur(9.7px);
+    border: 1px solid rgba(49, 55, 83, 0.3);
+}
