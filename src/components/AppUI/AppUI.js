@@ -17,7 +17,7 @@ function AppUI() {
             </div>
             <div className='deezerPowered'>
                 <small>Powered by <b>deezer API </b>
-                    <span style={{ color: '#eb3d11' }}><FontAwesomeIcon icon="fa-brands fa-deezer" /></span>
+                    <span><FontAwesomeIcon icon="fa-brands fa-deezer" /></span>
                 </small>
             </div>
             <MusicList />

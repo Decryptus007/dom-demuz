@@ -8,4 +8,16 @@
 
 .navigate span {
     color: white;
+    cursor: pointer;
+}
+
+.navigate span:focus {
+    color: tomato;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .navigate {
+        height: 7vh;
+    }
 }

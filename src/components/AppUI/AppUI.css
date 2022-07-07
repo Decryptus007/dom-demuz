@@ -34,3 +34,24 @@
     -webkit-backdrop-filter: blur(9.7px);
     border: 1px solid rgba(49, 55, 83, 0.3);
 }
+
+.deezerPowered span {
+    background: linear-gradient(to right, yellow 5%, tomato 80%, blue 15%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: tomato;
+}
+
+@media (max-width: 768px) {
+    .appUI {
+        height: 100vh;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .imageHolder {
+        height: 22vh;
+    }
+}
