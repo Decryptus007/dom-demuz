@@ -1,12 +1,84 @@
+/* .playBg {
+    background-color: #00000093;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+} */
 
 .playWindow {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
     transition: .5s;
-    border-radius: 25px 25px 0 0;
-    height: 85vh;
+    height: 100vh;
     width: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    /* From https://css.glass */
+    background: rgba(8, 8, 8, 0.51);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.9px);
+    -webkit-backdrop-filter: blur(4.9px);
+    border: 1px solid rgba(8, 8, 8, 0.3);
+    /* animation: slide .5s ; */
+    /* animation-fill-mode: forwards; */
 }
 
 img {
+    width: 75%;
+    height: 100vh;
+    border-radius: 25px;
+}
+
+.playHeader {
     width: 100%;
-    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnDown {
+    cursor: pointer;
+    padding: 5%;
+    width: 5%;
+    justify-self: flex-start;
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.playHeader small {
+    color: #acabab;
+    text-shadow: 1px 1px 1px black;
+}
+
+.titleTxt {
+    width: 95%;
+    text-align: center;
+}
+
+@keyframes slide {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 768px) {
+    .playWindow {
+        height: 85vh;
+        width: 33%;
+        margin: 7.5vh auto 0;
+        left: 33%;
+    }
 }
