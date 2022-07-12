@@ -28,8 +28,11 @@
     backdrop-filter: blur(4.9px);
     -webkit-backdrop-filter: blur(4.9px);
     border: 1px solid rgba(8, 8, 8, 0.3);
-    /* animation: slide .5s ; */
-    /* animation-fill-mode: forwards; */
+}
+
+audio {
+    width: 0;
+    height: 0;
 }
 
 img {
@@ -64,15 +67,53 @@ img {
     text-align: center;
 }
 
-@keyframes slide {
-    from {
-        transform: translateY(100%);
-    }
-
-    to {
-        transform: translateY(0);
-    }
+.audioManager {
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
+
+.audioControls {
+    color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2% 3%;
+}
+
+.audioControls span {
+    font-size: xx-large;
+    cursor: pointer;
+}
+
+.audioControls span:nth-child(2) {
+    padding: 2% 5%;
+    font-size: xxx-large;
+    border-radius: 50%;
+    background-color: #313753;
+}
+
+.audioSeek {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #cac8c8;
+}
+
+.audioSeek small {
+    width: 18%;
+    text-align: center;
+}
+
+.timeUpdate {
+    width: 80%;
+}
+
 
 @media (min-width: 768px) {
     .playWindow {

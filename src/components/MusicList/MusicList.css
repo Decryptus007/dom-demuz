@@ -42,12 +42,28 @@
     justify-content: space-between;
 }
 
+.thumbnail {
+  width: 10%;
+  margin: 0 auto;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
 .musicText, .musicControls {
     width: 80%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+}
+
+.musicText {
+  padding-left: 5%;
 }
 
 .musicText p:nth-child(2) {
@@ -57,7 +73,7 @@
 }
 
 .musicControls {
-    width: 20%;
+    width: 10%;
     justify-content: space-around;
     flex-direction: row;
     align-items: center;

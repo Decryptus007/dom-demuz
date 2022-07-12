@@ -8,9 +8,6 @@ import './MusicList.css'
 
 export default function MusicList() {
     const [musics, setMusics] = useState([])
-    const [musicDuration, setMusicDuration] = useState([])
-    const [hours, setHours] = useState([])
-    const [mins, setMins] = useState([])
 
     const [title, setTitle] = useState()
     const [artist, setArtist] = useState()
@@ -19,6 +16,10 @@ export default function MusicList() {
     const [audioFile, setAudioFile] = useState()
     const [play, setPlay] = useState(false)
     const [pop, setPop] = useState(null)
+
+    const [isPlaying, setIsPlaying] = useState(false)
+
+    const [isEnter, setIsEnter] = useState(false);
 
     const options = {
         method: 'GET',
@@ -33,59 +34,116 @@ export default function MusicList() {
         axios.request(options).then(function (response) {
             const res = response.data
             setMusics(res.tracks.data)
-            setMusicDuration(res.duration)
         }).catch(function (error) {
             console.log(error, 'Error Fetching');
         })
     })
 
-    useEffect(() => {
-        if (musicDuration) {
-            setHours(Math.floor(musicDuration / 3600));
-            setMins(musicDuration % 60)
-        }
-    }, [musicDuration])
 
-
-    function playMusic(id, title, artist, image, audioFile) {
+    function playMusic(id, title, artist, image, audioFile, fromControl) {
         setTitle(title)
         setArtist(artist)
         setImage(image)
         setPop('translateY(0)')
 
-        if (id !== uniqueId) {
-            // if (newAudio && (audio !== newAudio)) {
-            //     console.log('If Block');
-            //     audio.pause()
-            //     audio.currentTime = 0
-            //     audio.src = ''
-            //     console.log(audio.src);
-            // } else {
-            //     audio === newAudio ? console.log(true) : console.log(false);
-            //     setPop('translateY(0)')
-            //     setUniqueId(id)
-            //     setAudioFile(audioFile)
-            //     newAudio.play()
-            //     console.log('Else Block');
-            // }
+        if (fromControl) {
+            setIsPlaying(true)
+        }
+
+
+        if (isPlaying === false) {
+            if (id !== uniqueId) {
+                setUniqueId(id)
+                setAudioFile(audioFile)
+                setPlay(true)
+
+            } else {
+                mutatePlayState()
+                setPop('translateY(0)')
+            }
+            setIsPlaying(true)
+        } else if (isPlaying && id !== uniqueId) {
+            setPlay(false)
             setUniqueId(id)
             setAudioFile(audioFile)
             setPlay(true)
-
-        } else {
+        } else if ((fromControl && id === uniqueId) && isPlaying) {
+            setPlay(false)
+            setAudioFile(audioFile)
+            setPlay(true)
+        }
+        else {
+            setPlay(false)
+            setIsPlaying(false)
             setPop('translateY(0)')
         }
+
+        setIsEnter(true)
+    }
+
+    function exitFullScreen() {
+        setIsEnter(false)
+    }
+
+    function playinFunc() {
+        setIsPlaying(false)
+        setPlay(false)
     }
 
     function closePlayWindow() {
         setPop('translateY(500%)')
     }
 
+    function mutatePlayState() {
+
+        if (play === false) {
+            setPlay(true)
+            setIsPlaying(true)
+        } else {
+            setIsPlaying(false)
+            setPlay(false)
+        }
+    }
+
+    function prevSong() {
+        let prevNumber = uniqueId
+
+        if (prevNumber > 0) {
+            setUniqueId(prevNumber - 1)
+        } else if (prevNumber === 0) {
+            setUniqueId(parseInt(musics.length - 1))
+        } else if (prevNumber === musics.length - 1) {
+            setUniqueId(parseInt(0))
+        }
+        playMusic(prevNumber, musics[prevNumber].title, musics[prevNumber].artist.name, musics[prevNumber].album.cover_medium, musics[prevNumber].preview, true)
+    }
+
+    function nextSong() {
+        let nextNumber = uniqueId
+
+        if (nextNumber >= 0) {
+            setUniqueId(parseInt(nextNumber + 1))
+        } else if (nextNumber === musics.length - 1) {
+            setUniqueId(parseInt(0))
+        } else {
+            setUniqueId(parseInt(0))
+        }
+        playMusic(nextNumber, musics[nextNumber].title, musics[nextNumber].artist.name, musics[nextNumber].album.cover_medium, musics[nextNumber].preview, true)
+    }
+
 
     return (
         <>
             <PlayWindow artist={artist}
-                playState={play}
+                isEnter={isEnter}
+                setIsEnter={setIsEnter}
+                exitFullScreen={exitFullScreen}
+                nextSong={nextSong}
+                prevSong={prevSong}
+                mutatePlayState={mutatePlayState}
+                playinFunc={playinFunc}
+                isPlaying={isPlaying}
+                play={play}
                 pop={pop}
                 closePlayWindow={closePlayWindow}
                 title={title}
@@ -94,18 +152,20 @@ export default function MusicList() {
             <div className='musicList'>
                 {musics.length > 0 ? <>
                     <div className='musicHeader'>
-                        <p tabIndex={0} className="playBtn">Play All</p>
-                        <small>{hours}hrs {mins}mins</small>
+                        <p tabIndex={0} className="playBtn">Tap on a music to play.</p>
+                        <small style={{ color: 'red' }}>Dev. on hiatus</small>
                     </div>
                     {musics.map((music, id) => (
-                        <div className='musicHolder' key={id}>
+                        <div className='musicHolder' key={id}
+                            onClick={() => playMusic(id, music.title, music.artist.name, music.album.cover_medium, music.preview)} >
+                            <div className='thumbnail'>
+                                <img src={music.album.cover_small} alt="thumbnail" />
+                            </div>
                             <div className="musicText">
                                 <p>{music.title}</p>
                                 <p>{music.artist.name}</p>
                             </div>
                             <div className="musicControls">
-                                <span onClick={() => playMusic(id, music.title, music.artist.name, music.album.cover_medium, music.preview)}
-                                ><FontAwesomeIcon icon="fa-solid fa-play" /></span>
                                 <span><FontAwesomeIcon icon="fa-solid fa-info" /></span>
                             </div>
                         </div>
