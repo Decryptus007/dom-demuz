@@ -13,7 +13,7 @@ function AppUI() {
                 <h2><span style={{ color: 'tomato' }}>De</span><span style={{ color: 'skyblue' }}>muz</span>
                     <span style={{ color: 'black' }}><FontAwesomeIcon icon="fa-solid fa-music" /></span>
                 </h2>
-                <p>Decryptus Curated Playlist</p>
+                <p>Top Nigeria🇳🇬 Preview</p>
             </div>
             <div className='deezerPowered'>
                 <small>Powered by <b>deezer API </b>

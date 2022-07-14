@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,7 +12,7 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'PT Sans', sans-serif;
   background: linear-gradient(to right bottom, #2d3352 55%, #313753 45%);
 }
 

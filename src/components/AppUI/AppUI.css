@@ -1,4 +1,6 @@
 .appUI {
+    position: relative;
+    overflow: hidden;
     height: 85vh;
     width: 33%;
     margin: 7.5vh auto 0;

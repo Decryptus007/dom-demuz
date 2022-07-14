@@ -19,28 +19,69 @@ export default function MusicList() {
 
     const [isPlaying, setIsPlaying] = useState(false)
 
-    const [isEnter, setIsEnter] = useState(false);
+    const [isEnter, setIsEnter] = useState(false)
 
-    const options = {
-        method: 'GET',
-        url: 'https://deezerdevs-deezer.p.rapidapi.com/playlist/1362516565',
-        headers: {
-            'X-RapidAPI-Key': '6cf60c5035msh9833080620e7dbap1eb5cajsna95426d6ced6',
-            'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-        }
-    }
+    const [networkLoad, setNetworkLoad] = useState(true)
+    const [loadingScreen, setLoadingScreen] = useState()
+    const [retry, setRetry] = useState(false)
+
+    const [nowPlaying, setNowPlaying] = useState()
+
 
     useEffect(() => {
+        const options = {
+            method: 'GET',
+            url: 'https://deezerdevs-deezer.p.rapidapi.com/playlist/1362516565',
+            headers: {
+                'X-RapidAPI-Key': '6cf60c5035msh9833080620e7dbap1eb5cajsna95426d6ced6',
+                'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+            }
+        }
+
         axios.request(options).then(function (response) {
+            setNetworkLoad(true)
             const res = response.data
             setMusics(res.tracks.data)
         }).catch(function (error) {
-            console.log(error, 'Error Fetching');
+            // console.log(error, 'Error Fetching');
+            setTimeout(() => {
+                setNetworkLoad(false)
+            }, 5000);
         })
-    })
+    }, [retry])
+
+    useEffect(() => {
+        if (networkLoad) {
+            setLoadingScreen(<div className="loader">Loading...</div>)
+        } else {
+            setLoadingScreen(<div className='retryBtn'>
+                <p onClick={() => {
+                    setNetworkLoad(true)
+                    setRetry(!retry)
+                }}>No Response From Server. Please Retry</p>
+            </div>)
+        }
+    }, [networkLoad, retry])
+
+    useEffect(() => {
+        if (isPlaying) {
+            setNowPlaying(<div className="nowPlaying" onClick={() => setPop('translateY(0)')}>
+                <div>
+                    <small>Now Playing</small>
+                    <p>{title}</p>
+                </div>
+                <span><FontAwesomeIcon icon="fa-solid fa-compact-disc" /></span>
+            </div>)
+        } else {
+            setNowPlaying(<div className='musicHeader'>
+                <p tabIndex={0} className="playBtn">Tap on a music to play.</p>
+                <small style={{ color: 'red' }}>Dev. on hiatus</small>
+            </div>)
+        }
+    }, [isPlaying, title])
 
 
-    function playMusic(id, title, artist, image, audioFile, fromControl) {
+    function playMusic(id, title, artist, image, audioFile, fromControl = true) {
         setTitle(title)
         setArtist(artist)
         setImage(image)
@@ -48,6 +89,9 @@ export default function MusicList() {
 
         if (fromControl) {
             setIsPlaying(true)
+            setPlay(false)
+            setAudioFile(audioFile)
+            setPlay(true)
         }
 
 
@@ -151,10 +195,7 @@ export default function MusicList() {
                 audioFile={audioFile} />
             <div className='musicList'>
                 {musics.length > 0 ? <>
-                    <div className='musicHeader'>
-                        <p tabIndex={0} className="playBtn">Tap on a music to play.</p>
-                        <small style={{ color: 'red' }}>Dev. on hiatus</small>
-                    </div>
+                    {nowPlaying}
                     {musics.map((music, id) => (
                         <div className='musicHolder' key={id}
                             onClick={() => playMusic(id, music.title, music.artist.name, music.album.cover_medium, music.preview)} >
@@ -170,7 +211,7 @@ export default function MusicList() {
                             </div>
                         </div>
                     ))}
-                </> : <div className="loader">Loading...</div>}
+                </> : loadingScreen}
             </div>
         </>
     )

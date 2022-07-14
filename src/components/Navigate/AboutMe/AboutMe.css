@@ -1,0 +1,138 @@
+.aboutMe {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: .5s;
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    /* From https://css.glass */
+    background: rgba(8, 8, 8, 0.51);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.9px);
+    -webkit-backdrop-filter: blur(4.9px);
+    border: 1px solid rgba(8, 8, 8, 0.3);
+}
+
+.profileHeader span {
+    color: teal;
+}
+
+.profileHeader {
+    width: 100%;
+    height: 50vh;
+    /* background-color: #000000d8; */
+    border-radius: 0 0 50px 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profileHeader .backP {
+    width: 10%;
+    padding: 3%;
+    font-size: xx-large;
+    align-self: flex-start;
+}
+
+.profileHeader div {
+    width: 100%;
+}
+
+.profileHeader div img {
+    margin: 0 auto;
+    display: block;
+    padding: 4%;
+    border-radius: 50%;
+    background-color: #b0fdfd1f;
+    border: 2px solid teal;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.profileHeader p span {
+    font-size: small;
+    padding: 2%;
+}
+
+.profileHeader p {
+    /* padding: 2% 0; */
+    text-align: center;
+    font-size: large;
+    font-weight: 700;
+}
+
+.profileHeader p small {
+    font-weight: 300;
+    font-size: medium;
+}
+
+main {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    height: 45vh;
+}
+
+.meBio {
+    margin-top: 10%;
+    padding: 5% 2%;
+    background-color: black;
+    border-left: 2px solid teal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.meBio span {
+    align-self: flex-start;
+}
+
+.meBio small {
+    padding: 0 2%;
+}
+
+article {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 10px;
+}
+
+article a {
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+    width: 80%;
+    text-align: center;
+    border-radius: 20px;
+    padding: 3%;
+    background-color: #0000ff;
+}
+
+article a p span {
+    color: white;
+}
+
+article a:nth-child(2) {
+    background-color: black;
+}
+
+article a:nth-child(3) {
+    background-color: #28a7da;
+}
