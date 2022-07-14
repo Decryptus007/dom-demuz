@@ -37,7 +37,7 @@ export default function AboutMe(props) {
                             GitHub
                         </p>
                     </a>
-                    <a href='https://https://twitter.com/inidomnick' target={'_blank'} rel="noreferrer">
+                    <a href='https://twitter.com/inidomnick' target={'_blank'} rel="noreferrer">
                         <p>
                             <span><FontAwesomeIcon icon="fa-brands fa-twitter" /></span>
                             Twitter
